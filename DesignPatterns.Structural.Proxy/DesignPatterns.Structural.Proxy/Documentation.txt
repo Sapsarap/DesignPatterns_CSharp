@@ -1,0 +1,12 @@
+﻿This pattern sometimes looks very similar to decorator and  adapter pattern but its not. 
+Decorator adds additional functionality on an object by wrapping the object, the  adapter provides a changed interface for the object 
+whereas the proxy pattern provides the same interface as the original object but wraps it to hide the communication and marshalling/unmarshalling details.
+
+
+
+
+Marshalling (englisch marshal ‚aufstellen‘, ‚ordnen‘) ist das Umwandeln von strukturierten oder elementaren Daten in ein Format, das die Übermittlung an andere Prozesse ermöglicht. 
+Auf Empfängerseite werden aus diesem Format die Daten in ihrer ursprünglichen Struktur wiederhergestellt, was als Unmarshalling oder Demarshalling bezeichnet wird.
+
+In der Praxis findet man häufig Marshalling in der Form, dass Objekte in das XML-Format und wieder zurück in Objekte umgewandelt werden. 
+Bildlich ausgedrückt wird das Objekt zwischenzeitlich in XML „eingefroren“, bis es wieder zu einem Objekt „aufgetaut“ wird.

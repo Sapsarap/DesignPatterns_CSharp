@@ -1,0 +1,30 @@
+﻿Anwendungsfälle
+Trennung der Objektverarbeitung (Wie?) von der konkreten Objekterstellung (Instanziierung; Was?). Delegation der Objektinstanziierung an Unterklasse.
+Authentifizierungssysteme. Für jeden User wird nach dem Login ein Ticket erstellt, das seine Rechte im System repräsentiert. 
+Statt eine universelle Ticketklasse mit duzenden, je nach Userrechten gesetzten Attributen zu nutzen, werden spezielle Tickets erstellt. 
+Dies geschieht mittels einer TicketFactory und einer createTicket()-Methode, die mit den nötigen Informationen parametrisiert wird. 
+Anhand dieser Parameter wird entschieden, welches Ticket erstellt wird. 
+Verschiedene Erzeugungsprozesse werden durch mehrfaches Ableiten dieser Factory ermöglicht (InternetTicketFactory, IntranetTicketFactory). ([PK], Seite 27f.)
+Fälle, in denen mit einer wachsenden Anzahl und Ausformung von Produkten zu rechnen ist. Sowie Szenarien in denen alle Produkte einen allgemeinen Herstellungsprozess durchlaufen müssen, egal was für ein Produkt sie konkret sind.
+Eine Pizzeria erstellt je nach Parameter verschiedene Pizzen (Salami, Hawaii, Calzone, Quattro Stagioni), die immer gleich zubereitet werden (backen, schneiden, einpacken). Um den regionalen Wünschen der Menschen in Berlin, Hamburg und Rostock zu genügen, müssen spezielle Pizzen für eben diese Städte erstellt werden. Diese Erstellung geschieht in den speziellen Unterklassen der Pizzeria (BerlinPizzeria, HamburgPizzeria, RostockPizzeria), die die speziellen Pizzen erstellen (BerlinSalami, RostockCalzone etc.). Die Verarbeitung ist in allen Fällen gleich und erfolgt in der abstrakten Pizzeriaklasse, die nur die abstrahierte Pizzaschnittstelle kennt. Schnell können somit neue Pizzasorten und Pizzerias ins System integriert werden. ([VKBF], Seite 118ff.)
+Wenn die konkret zu erstellenden Produkte nicht bekannt sind oder nicht von vorne herein festgelegt werden sollen.
+Frameworks und Klassenbibliotheken.
+
+
+
+
+Vorteile
+Herstellungsprozess ist von einer konkreten Implementierung getrennt und unterschiedliche Produktimplementierungen können denselben Produktionsvorgang durchlaufen.
+Wiederverwendbarkeit und Konsistenz durch Kapselung des Objekterstellungscodes in eigener Klasse. 
+Dadurch entsteht eine einheitliche und zentrale Schnittstelle für den Client. 
+Die Produktimplementierung ist von seiner Verwendung entkoppelt. Außerdem entsteht ein zentraler Punkt der Wartung (geringerer Änderungsaufwand).
+Kapselung des allgemeinen Herstellungscodes in die Superklasse Creator, die auf jedem Produkt vor Auslieferung an den Client durchgeführt wird.
+Erweiterbarkeit, Austauschbarkeit und Flexibilität durch problemlose Einführung neuer Products und ConcreteCreators (bzw. Modifizierung oder Auswechseln bestehender) 
+ohne Brechen des Clientcodes, dank konsistenter Schnittstelle. So kann ein neuer ConcreteCreator in das System integriert werden und dabei bestehenden 
+Creatorcode wiederverwenden ohne Änderungen am bestehenden Client nötig zu machen.
+
+
+Nachteile
+Enge Kopplung eines konkreten Creators an ein konkretes Produkt. Für jedes neue Produkt muss ein neuer ConcreteCreator geschrieben werden und den abstrakte Creator ableiten. 
+Unser Gesamtsystem hat damit nur wegen der Fabrikmethode einen weiteren Evolutionsast. Bei der parametrisierten Variante des Patterns ist dies weniger problematisch, 
+da oft nur ein bestehender konkreter Creator angepasst werden muss.

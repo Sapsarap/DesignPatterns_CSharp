@@ -1,0 +1,30 @@
+﻿Anwendungsfälle
+Wenn verschiedene Objekte zu einem Kontext erstellt werden und daher immer zusammenhängend erstellt werden müssen. Also immer dann, wenn Konsistenz im Objektpool sichergestellt werden muss.
+In einem System müssen Dateien verschiedenen Formats eingelesen und unterschiedlich weiterverarbeitet werden. Dafür wird für jedes Format eine Reader-Klasse erstellt und für jede mögliche Weiterverarbeitung eine Transformer-Klasse. Dabei ist es unbedingt erforderlich, dass zu einem Reader auch der passende Transformer gewählt wird. Um dieser Anforderung zu genügen, kann das Abstract Factory verwendet werden. (nach [PK], Seite 21)
+Die Persistenzlogik einer Applikation kapselt den Zugriff auf die Datenbank. Dabei soll diese natürlich nicht nur auf einer MySQL-Datenbank ihre Daten ablegen können, sondern auch mit anderen Datenbanken (Oracle etc.) interagieren können. Dazu sind allerdings verschiedene DBConnection- und jeweils korrespondierende DBCommand-Objekte von Nöten. Nun könnte nach dem Abstract Factory Pattern eine OracleDBClientFactory zwei Methoden zum Erhalten von solchen Objektpaaren bereitstellen. Die Persistenzlogik arbeitet auf Interfaces und hat keine Kenntnis von den verwendeten datenbankspezifischen Objekten. (frei nach [Mosa])
+Wenn ein System mit unterschiedlichen Sets von Objekten konfiguriert werden muss oder dies ermöglich sein soll.
+Wenn ein System losgelöst davon sein soll, wie bestimmte Objekte erstellt werden.
+Eine Objektfamilie bereitgestellt werden soll, aber noch keine Aussagen zu den konkreten Implementierungen gemacht werden kann oder soll. Stattdessen werden Interfaces bereitgestellt.
+
+Typische Anwendung von Abstract Factorys sind GUI-Bibliotheken, die unterschiedliche Look & Feels unterstützen. 
+Dabei wird für jedes typische "Widget" (Textfeld, Button, Scrollpane, Panel, Labels) ein Interface definiert. 
+Für jedes Look & Feel werden alle Widgets implementiert und eine konkrete Factory (beispielsweise WindowsFactory, MacOSXFactory oder GDKFactory) erzeugt, 
+die Instanzen des entsprechenden Widgets zurückgibt. Die konkreten Factorys erfüllen dabei die Schnittstelle einer Abstract Factory 
+(Methoden: createButton(), createTextField() etc). Der Client holt sich die Widgets (vom Typ des Interfaces) von der Abstract Factory, weiß dabei aber nicht, 
+welches Widget er nun konkret erhält bzw. von welchem Look & Feel es ist. Dies ermöglicht das schreiben von GUI-Code unabhängig vom gewählten Look & Feel und macht 
+das Look & Feel damit austauschbar (frei nach [GoF], Seite 
+
+
+
+Vorteile
+Durch das Abschirmen der konkreten Klassen wird der Clientcode allgemeingültig. Es ist kein Code für spezielle Fälle notwendig.
+Konsistenz. Es wird sichergestellt, dass nur jene Objekte zum Client gelangen, die auch zusammenpassen. Es ist weiterhin gewährleistet, dass immer nur ein konkretes Familienmitglied eines Typs zur gleichen Zeit im Einsatz ist.
+Flexibilität. Ganze Objektfamilien können ausgetaucht werden, ohne dass der Clientcode bricht, da sich der Client nur auf Abstraktionen (Abstract Factory, Productschnittstellen) stützt.
+Einfache Erweiterung mit neuen Produktfamilien. Neue Productsets können sehr einfach ins System integriert werden. Dazu ist lediglich das erneute Implementieren der Factoryschnittstelle nötig. Anschließend muss nur noch an einer zentralen Stelle im Client die neue Factory instanziiert werden.
+Wiederverwendbarkeit. Konkrete Products können Mitglieder verschiedener Produktfamilien sein.
+Verschlankung des Clientcodes.
+Nachteile
+Unflexibilität hinsichtlich neuer Familienmitglieder. Soll der Produktfamilie ein neues Produkt hinzugefügt werden, so ist eine Änderung der Schnittstelle der 
+Abstract Factory notwendig. Dies führt aber zum Brechen von Code aller konkreten Factorys. Der Änderungsaufwand ist groß.
+Daher sollte gleich zu Beginn sehr genau überlegt werden, welche Produkttypen erstellt werden sollen. Je weiter das System zum Zeitpunkt der nötigen 
+Erweiterung fortgeschritten ist, umso mehr Code muss modifiziert werden.
