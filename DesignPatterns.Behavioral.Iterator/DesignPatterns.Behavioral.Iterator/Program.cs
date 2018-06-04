@@ -11,6 +11,8 @@ namespace DesignPatterns.Behavioral.Iterator
     {
         static void Main(string[] args)
         {
+            //TODO-RealWorld
+
             ConcreteAggregate a = new ConcreteAggregate();
             a[0] = "Item A";
             a[1] = "Item B";
